@@ -37,4 +37,16 @@ describe("Drug Controller", () => {
       error: "Error fetching drug details",
     });
   });
+
+  it("should handle errors when fetching drug details", async () => {
+    const req = { params: { rxcui: "1", srclist: "1", rxaui: "1" } };
+    const res = { json: jest.fn(), status: jest.fn(() => res) };
+
+    const mockResponse = { data: "<mock XML response> " };
+    axios.get.mockResolvedValue(mockResponse);
+
+    await getProprietaryInfo(req, res);
+
+    expect(res.json).toHaveBeenCalledWith(mockResponse.data);
+  });
 });

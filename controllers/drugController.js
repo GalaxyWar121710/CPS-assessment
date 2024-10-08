@@ -46,7 +46,6 @@ const getProprietaryInfo = async (req, res) => {
     const response = await axios.get(proprietaryUrl);
     const xmlData = response.data;
 
-    // You would need to parse the XML response, so use an XML parsing library like xml2js
     const xml2js = require("xml2js");
     const parser = new xml2js.Parser();
 
