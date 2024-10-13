@@ -49,4 +49,13 @@ describe("Drug Controller", () => {
 
     expect(res.json).toHaveBeenCalledWith(mockResponse.data);
   });
+
+  test("should handle error for proprietary info request", async () => {
+    axios.get.mockRejectedValue(
+      new Error("Error fetching proprietary information.")
+    );
+    await expect(
+      getProprietaryInformation("invalidRxcui", "invalidRxaui", "invalidSource")
+    ).rejects.toThrow("Error fetching proprietary information.");
+  });
 });
